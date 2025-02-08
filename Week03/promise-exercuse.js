@@ -11,7 +11,7 @@ const getStudent = (id) => {
         }, 2000);
     });
 }
-getStudent(15).then((result) => {
+getStudent(15).then((result) => { 
     console.log(result);
 })
     .catch((err) => {
