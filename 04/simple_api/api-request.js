@@ -3,7 +3,10 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
 
+// กำหนดให้ Express ใช้งาน middleware สำหรับการแปลงข้อมูลรูปแบบ JSON ที่รับเข้ามาจาก client
 app.use(express.json());
+
+// กำหนดข้อมูลสมาชิกที่จะใช้ในการทดสอบการเขียน API
 const esMember = [
     { id: 21, 'fname': 'พัชรพล', 'lname': 'จันทร์นวล', 'tel': '0812345678' },
     { id: 33, 'fname': 'แทนรัก', 'lname': 'มงคลกาล', 'tel': '0998745632' },
@@ -36,6 +39,7 @@ app.get('/api/querymember', (req, res) => {
     }
 });
 
+// Endpoint to show member by id
 app.get('/api/getmemid/:id', (req, res) => {
     const memId = esMember.find(element => element.id === parseInt(req.params.id));
     if (memId) {
@@ -45,6 +49,7 @@ app.get('/api/getmemid/:id', (req, res) => {
     }
 });
 
+// Endpoint to add member
 app.post('/api/addmember', (req, res) => {
     // get data from request body
     const memId = req.body.id;
@@ -61,6 +66,7 @@ app.post('/api/addmember', (req, res) => {
     res.send(esMember);
 });
 
+// Endpoint to add members
 app.post('/api/addmembers', (req, res) => {
     // get data from request body
     const memArr = req.body;
@@ -80,6 +86,7 @@ app.post('/api/addmembers', (req, res) => {
     res.send(esMember);
 });
 
+// Endpoint to edit member
 app.put('/api/editmem/:id', (req, res) => {
     const memId = esMember.find(element => element.id === parseInt(req.body.id));
     if (memId) {
@@ -92,6 +99,7 @@ app.put('/api/editmem/:id', (req, res) => {
     res.send(esMember);
 });
 
+// Endpoint to delete member
 app.delete('/api/deletemem/:id', (req, res) => {
     const memId = esMember.find(element => element.id === parseInt(req.params.id));
     if (memId) {
